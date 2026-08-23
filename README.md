@@ -9,8 +9,6 @@
 
 **Plataforma de comercio electrónico de alta gama para moda contemporánea, colecciones exclusivas y sastrería de autor.**
 
-[Explorar Colección](#-características-principales) • [Arquitectura](#-arquitectura-del-proyecto) • [Instalación](#-instalación-y-despliegue) • [Roadmap](#-roadmap-de-producto)
-
 ---
 
 </div>
