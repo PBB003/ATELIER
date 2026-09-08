@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATELIER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- MÉTODO 1 CSS EXTERNO -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- MÉTODO 2 CSS INTERNO -->
+  <style>
+    #hero-nosotros{
+      background-image: url("img/percha.jpg");
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="contenedor">
+     <!-- LOGO -->
+    <a href="index.html">
+      <img src="img/logo.png" alt="ATELIER" style="width: 41px; height: auto;">
+    </a>
+
+
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Abrir menú"><span></span><span></span><span></span></label>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html#coleccion">Mujer</a></li>
+          <li><a href="index.html#coleccion">Hombre</a></li>
+          <li><a href="index.html#coleccion">Niños</a></li>
+          <li><a href="sobre-nosotros.html">Nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="utilidades">
+        <button aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+        <button aria-label="Mi cuenta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg></button>
+        <button aria-label="Carrito">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l1.5 12.5A2 2 0 0 0 8.5 18h8a2 2 0 0 0 2-1.6L20 7H6"/><circle cx="9" cy="21" r="1"/><circle cx="17" cy="21" r="1"/></svg>
+          <span class="cart-count">2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero-nosotros" class="hero" style="min-height:52vh;">
+      <div class="contenedor">
+        <div class="hero-contenido">
+          <p class="hero-eyebrow">Nuestra Historia</p>
+          <h1>Cada prenda cuenta una historia nacida en el Cibao</h1>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="contenedor">
+        <article class="pagina-hero" style="border:none;padding-top:0;">
+          <p class="eyebrow">De dónde venimos</p>
+          <h2>Siete mentes, un taller en Santiago de los Caballeros</h2>
+          <p>ATELIER nació en 2023 como el proyecto de <strong>7 creadores y desarrolladores en el corazón de la Ciudad Corazón</strong>. Nos unió la misma insatisfacción: la ropa comercial de masa que se deshilacha a los dos lavados y no aguanta el ritmo ni el clima de nuestro entorno.</p>
+          <p>Decidimos unir nuestras ideas para construir una marca local de confección consciente, fundada sobre una visión clara: <strong>una prenda con fibras de calidad dura más, transpira mejor y resalta con el tiempo</strong>.</p>
+        </article>
+
+        <div class="dos-columnas" style="margin-top:48px;">
+          <div>
+            <h2>Materiales honestos y climáticos</h2>
+            <p>Seleccionamos cuidadosamente algodón peinado transpirable, lino fresco y textiles de alta durabilidad ideales para nuestro entorno. Cada pieza lleva una ficha técnica con el origen de la tela y las recomendaciones para extender su vida útil.</p>
+            <p>Trabajamos de la mano con talleres locales cibaeños, apoyando la tradición textil de la región sin recurrir a procesos desmedidos que perjudiquen nuestros recursos.</p>
+          </div>
+          <img src="img/telas.jpeg" alt="Rollos de tela de algodón y lino en el taller">
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="contenedor">
+        <div class="section-titulo"><h2>Cómo tejemos cada colección</h2></div>
+        <ol class="proceso">
+          <li class="proceso-item">
+            <h3 style="font-size:1.05rem;">Diseño y fibra local</h3>
+            <p style="color:var(--ink-soft);font-size:.92rem;">Analizamos texturas como algodón y lino pensadas para el clima y estilo de vida santiaguero.</p>
+          </li>
+          <li class="proceso-item">
+            <h3 style="font-size:1.05rem;">Corte en lotes cortos</h3>
+            <p style="color:var(--ink-soft);font-size:.92rem;">Colaboramos con talleres artesanales en el Cibao produciendo piezas limitadas para evitar sobrantes.</p>
+          </li>
+          <li class="proceso-item">
+            <h3 style="font-size:1.05rem;">Inspección del equipo</h3>
+            <p style="color:var(--ink-soft);font-size:.92rem;">Cada uno de los 7 integrantes supervisa el empaque y acabado antes de enviarlo a tu puerta.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <div class="contenedor">
+        <div class="section-titulo"><h2>Guía rápida de materiales</h2></div>
+        <table class="tabla-materiales">
+          <thead>
+            <tr>
+              <th scope="col">Material</th>
+              <th scope="col">Origen</th>
+              <th scope="col">Cuidado</th>
+              <th scope="col">Se usa en</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Algodón peinado</td>
+              <td>Nacional (Cibao)</td>
+              <td>Lavado a máquina, frío</td>
+              <td>Camisetas, playeras urbanas</td>
+            </tr>
+            <tr>
+              <td>Lino botánico</td>
+              <td>Importado</td>
+              <td>Lavado a mano / Delicado</td>
+              <td>Chacabanas, camisas de verano</td>
+            </tr>
+            <tr>
+              <td>Mezcla sastre fresca</td>
+              <td>Nacional</td>
+              <td>Lavado en seco / Planchado suave</td>
+              <td>Pantalones, chaquetas livianas</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="contenedor footer-grid">
+      <div>
+        <h3>ATELIER</h3>
+        <p style="color:#B9B4A9;font-size:.9rem;max-width:260px;">Moda hecha en Santiago de los Caballeros con materiales honestos, pensada para durar.</p>
+      </div>
+      <div>
+        <h3>Empresa</h3>
+        <ul><li><a href="sobre-nosotros.html">Nosotros</a></li><li><a href="contacto.html">Contacto</a></li></ul>
+      </div>
+      <div>
+        <h3>Políticas</h3>
+        <ul><li><a href="#">Envíos y devoluciones</a></li><li><a href="#">Privacidad</a></li></ul>
+      </div>
+      <div>
+        <h3>Boletín</h3>
+        <form id="newsletter-form" action="#" onsubmit="return false;">
+          <input type="email" placeholder="tu@correo.com" aria-label="Correo electrónico">
+          <button type="submit">Unirme</button>
+        </form>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
