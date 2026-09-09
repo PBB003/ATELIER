@@ -51,7 +51,132 @@ const productos = [
   }
 ];
 
+/* ==========================================================================
+   ATELIER - FUNCIONES Y UTILIDADES
+   ========================================================================== */
+
+/**
+ * Formatea un número como precio en pesos dominicanos (RD$) con separador de miles.
+ * Si recibe un valor no válido, devuelve RD$0 por seguridad.
+ *
+ * @param {number|string} monto - Número o precio a formatear.
+ * @param {string} [moneda="DOP"] - Código de moneda (por defecto peso dominicano DOP).
+ * @param {string} [locale="es-DO"] - Región para dar el formato correcto (República Dominicana).
+ * @returns {string} Precio formateado (ej: "RD$2,450").
+ */
+function formatearMoneda(monto, moneda = "DOP", locale = "es-DO") {
+  const valorNumerico = Number(monto);
+
+  if (!Number.isFinite(valorNumerico) || Number.isNaN(valorNumerico)) {
+    return "RD$0";
+  }
+
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency: moneda,
+    minimumFractionDigits: Number.isInteger(valorNumerico) ? 0 : 2,
+    maximumFractionDigits: 2
+  }).format(valorNumerico);
+}
+
+/**
+ * Valida que el email tenga un formato correcto antes de procesarlo.
+ *
+ * @param {string} correo - Correo a validar.
+ * @returns {boolean} true si es un correo válido, false si no.
+ */
+function validarEmail(correo) {
+  if (typeof correo !== "string") {
+    return false;
+  }
+
+  const correoLimpio = correo.trim();
+  const patronEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+  return patronEmail.test(correoLimpio);
+}
+
+/**
+ * Verifica que el texto cumpla un mínimo de caracteres y no tenga caracteres extraños.
+ *
+ * @param {string} cadena - Texto que ingresó el usuario.
+ * @param {number} [minLen=3] - Cantidad mínima de caracteres requerida.
+ * @param {RegExp} [patronCaracteres] - Patrón de caracteres permitidos.
+ * @returns {boolean} true si el texto es válido.
+ */
+function validarTexto(
+  cadena,
+  minLen = 3,
+  patronCaracteres = /^[\p{L}\p{N}\s.,'’\-:;()!?¿¡"/%]+$/u
+) {
+  if (typeof cadena !== "string") {
+    return false;
+  }
+
+  const textoLimpio = cadena.trim();
+
+  if (textoLimpio.length < minLen) {
+    return false;
+  }
+
+  return patronCaracteres instanceof RegExp ? patronCaracteres.test(textoLimpio) : true;
+}
+
+/**
+ * Filtra los productos por su categoría sin modificar el arreglo original.
+ * Si se pasa "todas", regresa la lista completa.
+ *
+ * @param {Array<Object>} lista - Catálogo de productos.
+ * @param {string} categoria - Categoría elegida (ej: "Vestidos").
+ * @returns {Array<Object>} Lista filtrada de productos.
+ */
+function filtrarPorCategoria(lista, categoria) {
+  if (!Array.isArray(lista)) {
+    return [];
+  }
+
+  const categoriaBuscada = (categoria || "").trim().toLowerCase();
+
+  if (!categoriaBuscada || categoriaBuscada === "todas") {
+    return [...lista];
+  }
+
+  return lista.filter(producto => {
+    return (
+      Boolean(producto) &&
+      typeof producto.categoria === "string" &&
+      producto.categoria.trim().toLowerCase() === categoriaBuscada
+    );
+  });
+}
+
+/**
+ * Calcula el total aplicando un porcentaje de descuento (de 0 a 100).
+ *
+ * @param {number} precio - Precio base del producto.
+ * @param {number} [porcentajeDescuento=0] - Porcentaje de descuento a aplicar.
+ * @returns {number} Precio con el descuento ya aplicado.
+ */
+function calcularTotalConDescuento(precio, porcentajeDescuento = 0) {
+  const precioBase = Number(precio);
+  const descuento = Number(porcentajeDescuento);
+
+  if (!Number.isFinite(precioBase) || precioBase < 0) {
+    return 0;
+  }
+
+  if (!Number.isFinite(descuento) || descuento <= 0) {
+    return Math.round(precioBase * 100) / 100;
+  }
+
+  const descuentoAcotado = Math.min(Math.max(descuento, 0), 100);
+  const total = precioBase * (1 - descuentoAcotado / 100);
+
+  return Math.round(total * 100) / 100;
+}
+
 function mostrarProductos(lista) {
+  if (typeof document === "undefined") return;
   const contenedor = document.getElementById("productos-container");
 
   if (!contenedor) return; // esta página no tiene catálogo (contacto/nosotros)
@@ -76,7 +201,7 @@ function mostrarProductos(lista) {
 
      <div class="producto-info">
         <h3>${producto.nombre}</h3>
-        <p class="producto-precio">$${producto.precio.toLocaleString()}</p>
+        <p class="producto-precio">${formatearMoneda(producto.precio)}</p>
 
         <div class="colores">
           ${producto.colores.map(color => `
@@ -97,11 +222,11 @@ mostrarProductos(productos);
    Alterna la navegación por un campo de búsqueda + selector de categoría,
    y filtra el array "productos". */
 
-const btnBuscar = document.getElementById("btn-buscar");
-const navSearchZone = document.getElementById("nav-search-zone");
-const utilidades = document.querySelector(".utilidades");
-const inputBuscar = document.getElementById("buscador-input");
-const selectCategoria = document.getElementById("filtro-categoria");
+const btnBuscar = typeof document !== "undefined" ? document.getElementById("btn-buscar") : null;
+const navSearchZone = typeof document !== "undefined" ? document.getElementById("nav-search-zone") : null;
+const utilidades = typeof document !== "undefined" ? document.querySelector(".utilidades") : null;
+const inputBuscar = typeof document !== "undefined" ? document.getElementById("buscador-input") : null;
+const selectCategoria = typeof document !== "undefined" ? document.getElementById("filtro-categoria") : null;
 
 // Calcula cuánto debe desplazarse la lupa (#btn-buscar)
 // desde su posición normal en .utilidades hasta el borde izquierdo del
@@ -169,31 +294,35 @@ if (btnBuscar) {
   });
 }
 
-document.addEventListener("keydown", (evento) => {
-  if (evento.key === "Escape" && btnBuscar && btnBuscar.classList.contains("activo")) {
-    cerrarBuscador();
-  }
-});
+if (typeof document !== "undefined") {
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape" && btnBuscar && btnBuscar.classList.contains("activo")) {
+      cerrarBuscador();
+    }
+  });
+}
 
-window.addEventListener("resize", () => {
-  if (btnBuscar && btnBuscar.classList.contains("activo")) {
-    moverLupa(true);
-  }
-});
+if (typeof window !== "undefined") {
+  window.addEventListener("resize", () => {
+    if (btnBuscar && btnBuscar.classList.contains("activo")) {
+      moverLupa(true);
+    }
+  });
+}
 
 function aplicarFiltros() {
   const texto = (inputBuscar ? inputBuscar.value : "").trim().toLowerCase();
   const categoria = selectCategoria ? selectCategoria.value : "todas";
 
-  const filtrados = productos.filter(producto => {
-    const coincideTexto =
+  // Reutilizamos la función pura filtrarPorCategoria
+  const listaPorCategoria = filtrarPorCategoria(productos, categoria);
+
+  const filtrados = listaPorCategoria.filter(producto => {
+    return (
       texto === "" ||
       producto.nombre.toLowerCase().includes(texto) ||
-      producto.categoria.toLowerCase().includes(texto);
-
-    const coincideCategoria = categoria === "todas" || producto.categoria === categoria;
-
-    return coincideTexto && coincideCategoria;
+      producto.categoria.toLowerCase().includes(texto)
+    );
   });
 
   mostrarProductos(filtrados);
@@ -201,3 +330,63 @@ function aplicarFiltros() {
 
 if (inputBuscar) inputBuscar.addEventListener("input", aplicarFiltros);
 if (selectCategoria) selectCategoria.addEventListener("change", aplicarFiltros);
+
+/* ==========================================================================
+   VALIDACIONES INTERACTIVAS DE FORMULARIOS (Newsletter y Contacto)
+   ========================================================================== */
+
+// Validación del formulario de Boletín / Newsletter
+const formNewsletter = typeof document !== "undefined" ? document.getElementById("newsletter-form") : null;
+const inputNewsletter = typeof document !== "undefined" ? document.getElementById("newsletter-email") : null;
+
+if (formNewsletter && inputNewsletter) {
+  formNewsletter.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+    const email = inputNewsletter.value;
+
+    if (validarEmail(email)) {
+      alert(`¡Suscripción exitosa! Hemos enviado un 10% de descuento a: ${email.trim()}`);
+      inputNewsletter.value = "";
+    } else {
+      alert("Por favor ingresa una dirección de correo válida (ej. usuario@dominio.com).");
+      inputNewsletter.focus();
+    }
+  });
+}
+
+// Validación del formulario de contacto
+const formContacto = typeof document !== "undefined" ? document.querySelector("main form") : null;
+if (formContacto) {
+  formContacto.addEventListener("submit", (evento) => {
+    evento.preventDefault();
+
+    const inputNombre = document.getElementById("nombre");
+    const inputEmail = document.getElementById("email");
+    const inputMensaje = document.getElementById("mensaje");
+
+    const nombreValido = inputNombre ? validarTexto(inputNombre.value, 3) : true;
+    const emailValido = inputEmail ? validarEmail(inputEmail.value) : true;
+    const mensajeValido = inputMensaje ? validarTexto(inputMensaje.value, 5) : true;
+
+    if (!nombreValido) {
+      alert("El nombre debe tener al menos 3 caracteres y contener caracteres válidos.");
+      inputNombre && inputNombre.focus();
+      return;
+    }
+
+    if (!emailValido) {
+      alert("Por favor ingresa un correo electrónico con formato válido.");
+      inputEmail && inputEmail.focus();
+      return;
+    }
+
+    if (!mensajeValido) {
+      alert("Por favor ingresa un mensaje de al menos 5 caracteres.");
+      inputMensaje && inputMensaje.focus();
+      return;
+    }
+
+    alert("¡Mensaje enviado con éxito! Nos pondremos en contacto contigo a la brevedad.");
+    formContacto.reset();
+  });
+}
