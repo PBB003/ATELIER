@@ -505,8 +505,6 @@ textarea{ resize: vertical; min-height: 120px; }
   }
   .buscador-input{ padding-left: 16px; }
 }
-
-
 /* =========================== RESPONSIVE =========================== */
 @media (max-width: 900px){
   .grid-categorias, .grid-productos, .grid-confianza{ grid-template-columns: repeat(2, 1fr); }
