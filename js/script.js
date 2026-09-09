@@ -149,6 +149,28 @@ function validarCampo(campo) {
 }
 
 
+// Elimina el mensaje de confirmación anterior
+function quitarConfirmacion() {
+    const confirmacionAnterior = document.getElementById("mensaje-confirmacion");
+
+    if (confirmacionAnterior) {
+        confirmacionAnterior.remove();
+    }
+
+    return true;
+}
+
+// Elimina el mensaje de confirmación anterior
+function quitarConfirmacion() {
+    const confirmacionAnterior = document.getElementById("mensaje-confirmacion");
+
+    if (confirmacionAnterior) {
+        confirmacionAnterior.remove();
+    }
+
+    return true;
+}
+
 // Crea una tarjeta de confirmación dinámica
 function mostrarConfirmacion(nombreUsuario) {
 
@@ -177,6 +199,7 @@ function mostrarConfirmacion(nombreUsuario) {
 formulario.addEventListener("submit", function (event) {
 
     event.preventDefault();
+    quitarConfirmacion();
 
     const nombreValido = validarCampo(nombre);
     const emailValido = validarCampo(email);
