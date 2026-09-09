@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ATELIER</title>
 
+<link rel="icon" href="data:,">
 <!-- Tipografías -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -37,25 +38,70 @@
       <span></span><span></span><span></span>
     </label>
 
-    <nav class="main-nav" aria-label="Navegación principal">
-      <ul>
-        <li><a href="#">Mujer</a></li>
-        <li><a href="#">Hombre</a></li>
-        <li><a href="#">Niños</a></li>
-        <li><a href="sobre-nosotros.html">Nosotros</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-    </nav>
+    <div class="nav-search-zone" id="nav-search-zone">
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#">Mujer</a></li>
+          <li><a href="#">Hombre</a></li>
+          <li><a href="#">Niños</a></li>
+          <li><a href="sobre-nosotros.html">Nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <!-- Buscador dinámico: oculto hasta que se activa el modo búsqueda.
+           Ya no tiene su propio ícono de lupa: el botón #btn-buscar es
+           el que "viaja" visualmente hasta el borde izquierdo de este input. -->
+      <div class="buscador-wrap" id="buscador-wrap">
+        <input type="search" id="buscador-input" class="buscador-input" placeholder="Buscar productos..." aria-label="Buscar productos">
+      </div>
+    </div>
 
     <div class="utilidades">
-      <button aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-      <button aria-label="Mi cuenta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg></button>
-      <button aria-label="Favoritos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.4-9.5-9C.7 7.2 2.6 4 6 4c2 0 3.5 1.1 4.5 2.7C11.5 5.1 13 4 15 4c3.4 0 5.3 3.2 3.5 7-2.5 4.6-9.5 9-9.5 9Z"/></svg></button>
-      <button aria-label="Carrito">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l1.5 12.5A2 2 0 0 0 8.5 18h8a2 2 0 0 0 2-1.6L20 7H6"/><circle cx="9" cy="21" r="1"/><circle cx="17" cy="21" r="1"/></svg>
-        <span class="cart-count">2</span>
-      </button>
-    </div>
+
+          <!-- Botón de búsqueda -->
+          <button id="btn-buscar" aria-label="Buscar" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="7"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+
+          <!-- Selector de categoría -->
+          <select id="filtro-categoria" aria-label="Filtrar por categoría">
+            <option value="todas">Todas</option>
+            <option value="Vestidos">Vestidos</option>
+            <option value="Camisas">Camisas</option>
+            <option value="Pantalones">Pantalones</option>
+            <option value="Zapatos">Zapatos</option>
+          </select>
+
+          <!-- Cuenta -->
+          <button aria-label="Mi cuenta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/>
+            </svg>
+          </button>
+
+          <!-- Favoritos -->
+          <button aria-label="Favoritos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20s-7-4.4-9.5-9C.7 7.2 2.6 4 6 4c2 0 3.5 1.1 4.5 2.7C11.5 5.1 13 4 15 4c3.4 0 5.3 3.2 3.5 7-2.5 4.6-9.5 9-9.5 9Z"/>
+            </svg>
+          </button>
+
+          <!-- Carrito -->
+          <button aria-label="Carrito">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 4h2l1.5 12.5A2 2 0 0 0 8.5 18h8a2 2 0 0 0 2-1.6L20 7H6"/>
+              <circle cx="9" cy="21" r="1"/>
+              <circle cx="17" cy="21" r="1"/>
+            </svg>
+            <span class="cart-count">2</span>
+          </button>
+
+   </div>
   </div>
 </header>
 
@@ -108,60 +154,7 @@
         <h2>Novedades</h2>
         <a href="#">Ver tienda</a>
       </div>
-      <ul class="grid-productos">
-        <li class="producto-card">
-          <div class="producto-imagen">
-            <span class="etiqueta">Novedad</span>
-            <img src="https://plus.unsplash.com/premium_photo-1674327105078-5b2cdcc86929?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Vestido midi color crudo">
-          </div>
-          <div class="producto-info">
-            <h3>Vestido midi crudo</h3>
-            <p class="producto-precio">$2,450</p>
-            <div class="colores">
-              <span style="background:#211E1B;"></span>
-              <span style="background:#B23A2E;"></span>
-              <span style="background:#EFEBE2;border:1px solid #999;"></span>
-            </div>
-          </div>
-        </li>
-        <li class="producto-card">
-          <div class="producto-imagen">
-            <img src="https://images.pexels.com/photos/29732777/pexels-photo-29732777.jpeg" alt="Camisa de lino azul">
-          </div>
-          <div class="producto-info">
-            <h3>Camisa de lino</h3>
-            <p class="producto-precio">$1,890</p>
-            <div class="colores">
-              <span style="background:#3F5D54;"></span>
-              <span style="background:#FBFAF7;border:1px solid #999;"></span>
-            </div>
-          </div>
-        </li>
-        <li class="producto-card">
-          <div class="producto-imagen">
-            <span class="etiqueta">Oferta</span>
-            <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=500&q=80&auto=format&fit=crop" alt="Pantalón sastre">
-          </div>
-          <div class="producto-info">
-            <h3>Pantalón sastre</h3>
-            <p class="producto-precio">$2,100</p>
-            <div class="colores">
-              <span style="background:#211E1B;"></span>
-            </div>
-          </div>
-        </li>
-        <li class="producto-card">
-          <div class="producto-imagen">
-            <img src="https://images.pexels.com/photos/27256443/pexels-photo-27256443.jpeg" alt="Botines de cuero">
-          </div>
-          <div class="producto-info">
-            <h3>Botines de cuero</h3>
-            <p class="producto-precio">$3,300</p>
-            <div class="colores">
-              <span style="background:#211E1B;"></span>
-            </div>
-          </div>
-        </li>
+      <ul class="grid-productos" id="productos-container">
       </ul>
     </div>
   </section>
@@ -236,5 +229,7 @@
   </div>
 </footer>
 
+<script src="js/utils.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
