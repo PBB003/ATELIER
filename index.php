@@ -1,3 +1,6 @@
+<?php
+require_once "auth.php";
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,11 +28,11 @@
 
 <header class="site-header">
   <div class="contenedor">
-    <a href="index.html">
+    <a href="index.php">
       <img src="img/logo.png" alt="ATELIER" style="width: 42px; height: auto;">
     </a>
  
-    <a href="index.html" id="logo">
+    <a href="index.php" id="logo">
      TELIER
     </a>
 
@@ -41,11 +44,11 @@
     <div class="nav-search-zone" id="nav-search-zone">
       <nav class="main-nav" aria-label="Navegación principal">
         <ul>
-          <li><a href="#">Mujer</a></li>
-          <li><a href="#">Hombre</a></li>
-          <li><a href="#">Niños</a></li>
+          <li><a href="index.php#coleccion">Mujer</a></li>
+          <li><a href="index.php#coleccion">Hombre</a></li>
+          <li><a href="index.php#coleccion">Niños</a></li>
           <li><a href="sobre-nosotros.html">Nosotros</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="contacto.php">Contacto</a></li>
         </ul>
       </nav>
 
@@ -77,12 +80,12 @@
           </select>
 
           <!-- Cuenta -->
-          <button aria-label="Mi cuenta">
+          <a href="<?php echo isset($_SESSION['usuario_id']) ? 'mi-cuenta.php' : 'login.php'; ?>" aria-label="Mi cuenta" class="icono-utilidad">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="8" r="4"/>
               <path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/>
             </svg>
-          </button>
+          </a>
 
           <!-- Favoritos -->
           <button aria-label="Favoritos">
@@ -202,7 +205,7 @@
       <h3>Empresa</h3>
       <ul>
         <li><a href="sobre-nosotros.html">Nosotros</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="contacto.php">Contacto</a></li>
         <li><a href="#">Preguntas frecuentes</a></li>
       </ul>
     </div>

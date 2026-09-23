@@ -1,12 +1,4 @@
-/* =========================================================
-   TRAMA — hoja de estilos externa (styles.css)
-   Método CSS: EXTERNO — enlazada con <link> en las 3 páginas.
-   Ideal para: todo lo compartido (identidad visual, layout,
-   componentes). Un solo archivo alimenta todas las páginas,
-   así que cambiar un color o una fuente aquí actualiza el
-   sitio entero sin tocar el HTML. Es el método recomendado
-   para el 90% de los estilos de un proyecto real.
-   ========================================================= */
+
 
 /* ---- Tokens (selector de etiqueta :root) ---- */
 :root{
@@ -87,7 +79,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
      font-size: 1.6rem;
     letter-spacing: 15px;
     color: #000;
-    margin-right: 12rem; 
+    margin-right: 2rem; 
+    flex-shrink: 0;
 }
 #logo span{ color: var(--accent); }
 
@@ -103,12 +96,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .main-nav a:hover{ border-color: var(--accent); }
 
 .utilidades{ display: flex; align-items: center; gap: 18px; }
-.utilidades button{
+.utilidades button,
+.utilidades a.icono-utilidad{
   background: none;
   border: none;
   color: var(--ink);
   position: relative;
   padding: 4px;
+  display: inline-flex;
 }
 .utilidades svg{ width: 20px; height: 20px; }
 
@@ -505,6 +500,29 @@ textarea{ resize: vertical; min-height: 120px; }
   }
   .buscador-input{ padding-left: 16px; }
 }
+/* =========================== MENSAJES (formularios / backend) =========================== */
+.error-msg{
+  color: #B23A2E;
+  font-size: .85rem;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+.is-invalid{
+  border-color: #B23A2E !important;
+  outline: 2px solid rgba(178, 58, 46, .12);
+}
+.alert-success{
+  color: #2f6136;
+  background: rgba(58, 125, 68, .08);
+  border: 1px solid #3A7D44;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-size: .9rem;
+  margin-bottom: 20px;
+}
+
+.tabla-wrapper{ overflow-x: auto; }
+
 /* =========================== RESPONSIVE =========================== */
 @media (max-width: 900px){
   .grid-categorias, .grid-productos, .grid-confianza{ grid-template-columns: repeat(2, 1fr); }
@@ -524,7 +542,7 @@ textarea{ resize: vertical; min-height: 120px; }
   }
   .main-nav ul{ flex-direction: column; gap: 4px; }
   .main-nav a{ display: block; padding: 14px 4px; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
-  .nav-toggle:checked ~ .main-nav{ transform: translateX(0); }
+  .nav-toggle:checked ~ .nav-search-zone .main-nav{ transform: translateX(0); }
   .nav-toggle-label{ display: flex; }
 
   .grid-categorias, .grid-productos, .grid-confianza{ grid-template-columns: 1fr 1fr; }

@@ -19,11 +19,11 @@
 <body>
  <header class="site-header">
   <div class="contenedor">
-    <a href="index.html">
+    <a href="index.php">
       <img src="img/logo.png" alt="ATELIER" style="width: 42px; height: auto;">
     </a>
  
-    <a href="index.html" id="logo">
+    <a href="index.php" id="logo">
      TELIER
     </a>
 
@@ -35,11 +35,11 @@
     <div class="nav-search-zone" id="nav-search-zone">
       <nav class="main-nav" aria-label="Navegación principal">
         <ul>
-          <li><a href="index.html#coleccion">Mujer</a></li>
-          <li><a href="index.html#coleccion">Hombre</a></li>
-          <li><a href="index.html#coleccion">Niños</a></li>
+          <li><a href="index.php#coleccion">Mujer</a></li>
+          <li><a href="index.php#coleccion">Hombre</a></li>
+          <li><a href="index.php#coleccion">Niños</a></li>
           <li><a href="sobre-nosotros.html">Nosotros</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="contacto.php">Contacto</a></li>
         </ul>
       </nav>
 
@@ -71,12 +71,12 @@
           </select>
 
           <!-- Cuenta -->
-          <button aria-label="Mi cuenta">
+          <a href="login.php" aria-label="Mi cuenta" class="icono-utilidad">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="8" r="4"/>
               <path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/>
             </svg>
-          </button>
+          </a>
 
           <!-- Favoritos -->
           <button aria-label="Favoritos">
@@ -194,7 +194,7 @@
       </div>
       <div>
         <h3>Empresa</h3>
-        <ul><li><a href="sobre-nosotros.html">Nosotros</a></li><li><a href="contacto.html">Contacto</a></li></ul>
+        <ul><li><a href="sobre-nosotros.html">Nosotros</a></li><li><a href="contacto.php">Contacto</a></li></ul>
       </div>
       <div>
         <h3>Políticas</h3>
@@ -203,7 +203,7 @@
       <div>
         <h3>Boletín</h3>
         <form id="newsletter-form" action="#" onsubmit="return false;">
-          <input type="email" placeholder="tu@correo.com" aria-label="Correo electrónico">
+          <input type="email" id="newsletter-email" placeholder="tu@correo.com" aria-label="Correo electrónico">
           <button type="submit">Unirme</button>
         </form>
       </div>
