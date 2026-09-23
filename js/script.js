@@ -160,17 +160,6 @@ function quitarConfirmacion() {
     return true;
 }
 
-// Elimina el mensaje de confirmación anterior
-function quitarConfirmacion() {
-    const confirmacionAnterior = document.getElementById("mensaje-confirmacion");
-
-    if (confirmacionAnterior) {
-        confirmacionAnterior.remove();
-    }
-
-    return true;
-}
-
 // Crea una tarjeta de confirmación dinámica
 function mostrarConfirmacion(nombreUsuario) {
 
@@ -198,7 +187,6 @@ function mostrarConfirmacion(nombreUsuario) {
 // Validación al enviar el formulario
 formulario.addEventListener("submit", function (event) {
 
-    event.preventDefault();
     quitarConfirmacion();
 
     const nombreValido = validarCampo(nombre);
@@ -216,18 +204,9 @@ formulario.addEventListener("submit", function (event) {
 
 
     if (!formularioValido) {
+        event.preventDefault();
         return;
     }
-
-
-    // Guardamos el nombre antes de limpiar el formulario
-    const nombreUsuario = nombre.value.trim();
-
-    // Limpiamos el formulario
-    formulario.reset();
-
-    // Mostramos la confirmación dinámicamente
-    mostrarConfirmacion(nombreUsuario);
 
     console.log("Formulario enviado correctamente");
 });
